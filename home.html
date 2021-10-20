@@ -1,42 +1,89 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-   <link rel="stylesheet" href="css/bootstrap.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Peminjaman Fasilitas Ruangan</title>
 
-    <title>Home</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="index.php?p=tampil-data">Daftar Ruangan</a>
-        <a class="nav-link" href="index.php?p=daftar">Bantuan</a>
-        <a class="nav-link" href="index.php?p=daftar">Peminjaman</a>
-      </div>
-    </div>
-       <div class="navbar-nav">
-        <a class="nav-link" href="index.php?p=tampil-data">Register</a>
-      </div>
-    </div>
+    <!-- file css  -->
+    <link rel="stylesheet" href="css/stylehome.css">
+
+</head>
+<body>
+    
+<!-- header section -->
+<header class="header">
+    <a href="#" class="logo">
+        <img src="img/logo.png" alt="">
+    </a>
+
+    <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#bantuan">bantuan</a>
+        <a href="admin/data-ruang.php">daftar ruang</a>
+        <a href="#peminjaman">peminjaman</a>
+        <a href="#notifikasi">notifikasi</a>
+        <a href="#contact">contact</a>
+        <a href="registrasi.html">register</a>
     </nav>
-    <div class="label-page"></div>
-    <div class="content">
-       <div class="text-center" style="padding-top: 200px">
-         <h1> Sistem Peminjaman Fasilitas Ruangan di Politeknik Negeri Malang </h1>
-         <h4> Jl. Soekarno Hatta No. 9 Malang </h4><br>
-         <button style="background: blue;color: white;font-size: 11pt;width: 100px;border: none;
-  padding: 10px 20px;" type="submit">Login</button>
-       </div>
-       <br>
-       
-    </div>
-    </div>
-    <script type="text/JavaScript" src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+  </header>
+  <!-- header section -->
 
+  <!-- home section -->
+  <section class="home" id="home">
+    <div class="content">
+        <h3>Sistem Peminjaman Fasilitas Ruangan</h3>
+        <p>Pinjam Ruang merupakan sebuah project yang dibuat
+          dalam memudahkan mahasiswa maupun civitas akademika dalam melakukan peminjaman ruangan di Politeknik Negeri Malang.</p>
+        <a href="login.html" class="btn">login</a>
+    </div>
+  </section>
+  <!-- home section -->
+
+  <!-- bantuan section -->
+  <section class="bantuan" id="bantuan">
+  <h1 class="heading"> <span>Bantuan</span> </h1>
+
+  <div class="row">
+      <div class="image">
+          <img src="img/logo.png" alt="">
+      </div>
+      <div class="content">
+          <h3>Bagaimana tata cara peminjaman ruangan?</h3>
+          <p>
+            1. Untuk dapat melakukan peminjaman ruangan, anda diharuskan melakukan login.<br>
+            2. Jika ingin mengetahui ruangan yang tersedia, silahkan menuju menu daftar ruang.<br>
+            3. Perhatikan kapasitas dari ruangan yang diinginkan.<br>
+            4. Jika sudah mengetahui ruangan yang ingin dipinjam, silahkan klik menu peminjaman.<br>
+            5. Isikan data-data yang dibutuhkan, wajib menyertakan surat permohonan peminjaman.<br>
+            6. Jika semua data telah terisi klik tombol pinjam.<br>
+            7. Peminjaman telah terproses, silahkan tunggu pemberitahuan lebih lanjut.<br>
+            8. Untuk mengecek peminjaman, silahkan pilih notifikasi peminjaman.</p> 
+      </div>
+  </div>
+  </section>
+  <!-- bantuan section -->
+
+  <!-- footer section -->
+  <section class="footer">
+
+    <nav class="navbar">
+      <a href="#home">home</a>
+      <a href="#bantuan">bantuan</a>
+      <a href="#daftar-ruang">daftar ruang</a>
+      <a href="#peminjaman">peminjaman</a>
+      <a href="#notifikasi">notifikasi</a>
+      <a href="#contact">contact</a>
+      <a href="registrasi.html">register</a>
+  </nav>
+  <div class="credit">created by <span>Eldha dan Yurischa</span> | all rights reserved</div>
+  </section>
+  <!-- footer section -->
+
+
+  <!-- file js  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
