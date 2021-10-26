@@ -1,14 +1,7 @@
 <?php
 session_start();
-// Jika tidak bisa login maka balik ke login.php
-// jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
-if (!isset($_SESSION['login'])) {
-    header('location:login.php');
-    exit;
-}
-
 // Memanggil atau membutuhkan file
-require 'koneksi/connect.php';
+include 'koneksi/connect.php';
 
 // Mengambil data dari no ruangan
 $no_ruang = $_GET['no_ruang'];
@@ -106,8 +99,8 @@ if (isset($_POST['ubah'])) {
                         <input class="form-control form-control-sm w-50" id="gambar" name="gambar" type="file">
                     </div>
                     <div class="mb-3">
-                        <label for="nama_gedung" class="form-label">nama gedung</label>
-                        <input type="nama_gedung" class="form-control w-50" id="nama_gedung" value="<?= $ruang['nama_gedung']; ?>" name="nama_gedung" autocomplete="off" required>
+                        <label for="id_gedung" class="form-label">ID gedung</label>
+                        <input type="id_gedung" class="form-control w-50" id="id_gedung" value="<?= $ruang['id_gedung']; ?>" name="id_gedung" autocomplete="off" required>
                     </div>
                     <hr>
                     <a href="dataruang.php" class="btn btn-secondary">Kembali</a>

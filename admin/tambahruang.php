@@ -6,7 +6,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 // Memanggil atau membutuhkan file koneksi
-require 'koneksi/connect.php';
+include 'koneksi/connect.php';
 
 // Jika fungsi tambah lebih dari 0/data tersimpan, maka munculkan alert dibawah
 if (isset($_POST['simpan'])) {
@@ -98,6 +98,10 @@ if (isset($_POST['simpan'])) {
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar</label>
                         <input class="form-control form-control-sm w-50" id="gambar" name="gambar" type="file">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_gedung" class="form-label">ID Gedung</label>
+                        <input type="text" class="form-control w-50" id="id_gedung" name="id_gedung" required>
                     </div>
                     <hr>
                     <a href="dataruang.php" class="btn btn-secondary">Kembali</a>

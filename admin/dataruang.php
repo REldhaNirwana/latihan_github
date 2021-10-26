@@ -1,16 +1,9 @@
 <?php
-
 session_start();
-// Jika tidak bisa login maka balik ke login.php
-// jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
-if (!isset($_SESSION['login'])) {
-    header('location:login.php');
-    exit;
-}
 // Memanggil atau membutuhkan file
-require 'koneksi/connect.php';
+// include 'koneksi/connect.php';
 
-$ruang = query("SELECT * FROM ruang ORDER BY id_ruang DESC");
+// $ruang = query("SELECT * FROM ruang ORDER BY id_ruang DESC");
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +24,7 @@ $ruang = query("SELECT * FROM ruang ORDER BY id_ruang DESC");
     <!-- Font Google -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <!-- Own CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/stylehome.css">
 
     <title>Data Ruangan</title>
@@ -77,7 +70,7 @@ $ruang = query("SELECT * FROM ruang ORDER BY id_ruang DESC");
                             <th>Nama Ruangan</th>
                             <th>kapasitas</th>
                             <th>Status</th>
-                            <th>Nama Gedung</th>
+                            <th>ID Gedung</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -89,7 +82,7 @@ $ruang = query("SELECT * FROM ruang ORDER BY id_ruang DESC");
                                 <td><?= $row['nama']; ?></td>
                                 <td><?= $row['kapasitas']; ?></td>
                                 <td><?= $row['status']; ?></td>
-                                <td><?= $row['nama_gedung']; ?></td>
+                                <td><?= $row['id_gedung']; ?></td>
                                 <td>
                                     <button class="btn btn-success btn-sm text-white detail" data-id="<?= $row['no_ruang']; ?>" style="font-weight: 600;"><i class="bi bi-info-circle-fill"></i>&nbsp;Detail Ruang</button> |
 

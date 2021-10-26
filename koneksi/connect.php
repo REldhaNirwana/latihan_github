@@ -1,6 +1,6 @@
 <?php
 // Koneksi Database
-$koneksi = mysqli_connect("localhost", "root", "", "pinjamruangan");
+$koneksi = mysqli_connect("localhost", "root", "", "pinjamruang");
 
 // membuat fungsi query dalam bentuk array
 function query($query)
@@ -33,13 +33,13 @@ function tambah($data)
     $kapasitas = htmlspecialchars($data['kapasitas']);
     $status = htmlspecialchars($data['status']);
     $gambar = upload();
-    $nama_gedung = htmlspecialchars($data['nama_gedung']);
+    $id_gedung = htmlspecialchars($data['id_gedung']);
 
     if (!$gambar) {
         return false;
     }
 
-    $sql = "INSERT INTO ruang VALUES ('$no_ruang','$nama','$kapasitas','$status','$gambar','$nama_gedung')";
+    $sql = "INSERT INTO ruang VALUES ('$no_ruang','$nama','$kapasitas','$status','$gambar','$id_gedung')";
 
     mysqli_query($koneksi, $sql);
 
@@ -65,7 +65,7 @@ function ubah($data)
     $kapasitas = htmlspecialchars($data['kapasitas']);
     $status = htmlspecialchars($data['status']);
     $gambar = upload();
-    $nama_gedung = htmlspecialchars($data['nama_gedung']);
+    $id_gedung = htmlspecialchars($data['id_gedung']);
 
     $gambarLama = $data['gambarLama'];
 
@@ -75,7 +75,7 @@ function ubah($data)
         $gambar = upload();
     }
 
-    $sql = "UPDATE ruang SET nama = '$nama', kapasitas = '$kapasitas', status ='$status', gambar = '$gambar', nama_gedung = '$nama_gedung' WHERE no_ruang = $no_ruang";
+    $sql = "UPDATE ruang SET nama = '$nama', kapasitas = '$kapasitas', status ='$status', gambar = '$gambar', id_gedung = '$id_gedung' WHERE no_ruang = $no_ruang";
 
     mysqli_query($koneksi, $sql);
 

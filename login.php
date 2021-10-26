@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
     // password menggunakan md5
 
     // mengambil data dari user dimana username yg diambil
-    $result = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
+    $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
 
     $cek = mysqli_num_rows($result);
 

@@ -32,8 +32,8 @@ if (isset($_POST['dataRuang'])) {
                             <td width="60%">' . $row['status'] . '</td>
                         </tr>
                         <tr>
-                            <th width="40%">nama gedung</th>
-                            <td width="60%">' . $row['nama_gedung'] . '</td>
+                            <th width="40%">id_gedung</th>
+                            <td width="60%">' . $row['id_gedung'] . '</td>
                         </tr>
                         ';
     }
