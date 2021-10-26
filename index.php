@@ -1,3 +1,18 @@
+<?php
+session_start();
+// Jika tidak bisa login maka balik ke login.php
+// jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
+if (!isset($_SESSION['login'])) {
+    header('location:login.php');
+    exit;
+}
+
+// Memanggil atau membutuhkan file function.php
+require 'koneksi/connect.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +36,10 @@
     <nav class="navbar">
         <a href="#home">home</a>
         <a href="#bantuan">bantuan</a>
-        <a href="admin/data-ruang.php">daftar ruang</a>
+        <a href="admin/dataruang.php">daftar ruang</a>
         <a href="#peminjaman">peminjaman</a>
         <a href="#notifikasi">notifikasi</a>
-        <a href="#contact">contact</a>
-        <a href="registrasi.html">register</a>
+        <a href="logout.php">Logout</a>
     </nav>
   </header>
   <!-- header section -->
@@ -36,7 +50,7 @@
         <h3>Sistem Peminjaman Fasilitas Ruangan</h3>
         <p>Pinjam Ruang merupakan sebuah project yang dibuat
           dalam memudahkan mahasiswa maupun civitas akademika dalam melakukan peminjaman ruangan di Politeknik Negeri Malang.</p>
-        <a href="login.html" class="btn">login</a>
+        <a href="peminjaman.php" class="btn">Pinjam</a>
     </div>
   </section>
   <!-- home section -->
@@ -74,8 +88,6 @@
       <a href="#daftar-ruang">daftar ruang</a>
       <a href="#peminjaman">peminjaman</a>
       <a href="#notifikasi">notifikasi</a>
-      <a href="#contact">contact</a>
-      <a href="registrasi.html">register</a>
   </nav>
   <div class="credit">created by <span>Eldha dan Yurischa</span> | all rights reserved</div>
   </section>
