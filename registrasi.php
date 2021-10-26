@@ -10,7 +10,6 @@ if(isset($_POST['signup']) ){
     echo mysqli_error($db);
   }
 }
-
 ?>
 <!doctype html>
 <html lang="en">
