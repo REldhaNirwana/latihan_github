@@ -10,22 +10,8 @@ session_start();
 // Memanggil atau membutuhkan file function.php
 require 'function.php';
 
-// Jika fungsi tambah lebih dari 0/data tersimpan, maka munculkan alert dibawah
-if (isset($_POST['simpan'])) {
-    if (tambah($_POST) > 0) {
-        echo "<script>
-                alert('Data ruang berhasil ditambahkan!');
-                document.location.href = 'index.php';
-            </script>";
-    } else {
-        // Jika fungsi tambah dari 0/data tidak tersimpan, maka munculkan alert dibawah
-        echo "<script>
-                alert('Data ruang gagal ditambahkan!');
-            </script>";
-    }
-}
-
-
+// Menampilkan semua data
+$ruang = query("SELECT * FROM ruang ORDER BY idruang DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +25,16 @@ if (isset($_POST['simpan'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <!-- Font Google -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <!-- Own CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Tambah Data Ruang</title>
+    <title>DATA RUANG</title>
 </head>
 
 <body>
@@ -59,7 +48,7 @@ if (isset($_POST['simpan'])) {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link" aria-current="page" href="index_p.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
@@ -68,7 +57,7 @@ if (isset($_POST['simpan'])) {
                         <a class="nav-link" href="bantuan.php">Bantuan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="peminjaman.php">Peminjaman</a>
+                        <a class="nav-link" href="peminjaman_ps.php">Peminjaman</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
@@ -79,68 +68,59 @@ if (isset($_POST['simpan'])) {
     </nav>
     <!-- Close Navbar -->
 
-
     <!-- Container -->
     <div class="container">
         <div class="row my-2">
             <div class="col-md">
-                <h3 class="fw-bold text-uppercase"><i class="bi bi-person-plus-fill"></i>&nbsp;Tambah Data Ruangan</h3>
+                <h3 class="text-center fw-bold text-uppercase">Data Ruang</h3>
+                <hr>
             </div>
-            <hr>
         </div>
         <div class="row my-2">
+        </div>
+        <div class="row my-3">
             <div class="col-md">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="idruang" class="form-label">ID Ruang</label>
-                        <input type="number" class="form-control w-50" id="idruang" placeholder="Masukkan idruang" min="1" name="idruang" autocomplete="off" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control form-control-md w-50" id="nama" placeholder="Masukkan Nama" name="nama" autocomplete="off" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="kapasitas" class="form-label">Kapasitas</label>
-                        <input type="number" class="form-control w-50" id="kapasitas" placeholder="Masukkan kapasitas" name="kapasitas" autocomplete="off" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="jurusan" class="form-label">Jurusan</label>
-                        <select class="form-select w-50" id="jurusan" name="jurusan">
-                            <option disabled selected value>--------------------------------------------Pilih Jurusan--------------------------------------------</option>
-                            <option value="Teknik Kimia">Teknik Kimia</option>
-                            <option value="Administrasi Bisnis">Administrasi Bisnis</option>
-                            <option value="Akuntansi">Akuntansi</option>
-                            <option value="Teknik Elektro">Teknik Elektro</option>
-                            <option value="Teknik Sipil">Teknik Sipil</option>
-                            <option value="Teknologi Informasi">Teknologi Informasi</option>
-                            <option value="Teknik Mesin">Teknik Mesin</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label>Status</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status" id="dipinjam" value="dipinjam">
-                            <label class="form-check-label" for="dipinjam">Dipinjam</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="status" id="tidak dipinjam" value="tidak dipinjam">
-                            <label class="form-check-label" for="tidak dipinjam">Tidak dipinjam</label>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Gambar</label>
-                        <input class="form-control form-control-sm w-50" id="gambar" name="gambar" type="file">
-                    </div>
-                    <hr>
-                    <a href="index.php" class="btn btn-secondary">Kembali</a>
-                    <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>
-                </form>
+                <table id="data" class="table table-striped table-responsive table-hover text-center" style="width:100%">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>No.</th>
+                            <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1; ?>
+                        <?php foreach ($ruang as $row) : ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $row['nama']; ?></td>
+                                <td><?= $row['jurusan']; ?></td>
+                                <td><?= $row['status']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     <!-- Close Container -->
 
-
+    <!-- Modal Detail Data -->
+    <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="detail" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-uppercase" id="detail">Detail Data Ruang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center" id="detail-ruang">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Close Modal Detail Data -->
 
     <!-- Footer -->
     <div class="container-fluid">
@@ -167,6 +147,36 @@ if (isset($_POST['simpan'])) {
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-</body>
 
+    <!-- Data Tables -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Fungsi Table
+            $('#data').DataTable();
+            // Fungsi Table
+
+            // Fungsi Detail
+            $('.detail').click(function() {
+                var dataRuang = $(this).attr("data-id");
+                $.ajax({
+                    url: "detail.php",
+                    method: "post",
+                    data: {
+                        dataRuang,
+                        dataRuang
+                    },
+                    success: function(data) {
+                        $('#detail-ruang').html(data);
+                        $('#detail').modal("show");
+                    }
+                });
+            });
+            // Fungsi Detail
+        });
+    </script>
+</body>
 </html>
