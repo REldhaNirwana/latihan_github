@@ -15,31 +15,42 @@ if (isset($_POST['login'])) {
     $password = ($_POST['password']);
 
     // mengambil data dari user dimana username yg diambil
-    $result = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username' AND password='$password'");
+    $result = mysqli_query($koneksi,"select * from user where username='$username'");
 
     $cek = mysqli_num_rows($result);
 
     // jika $cek lebih dari 0, maka berhasil login dan masuk ke index.php
-    if($cek==1)
-			{
-				//login
-				$akun = mysqli_fetch_assoc($result);
-				if($akun['roles'] == "Admin"){
-					echo "<script>alert('Login Admin berhasil!')</script>";
-					echo "<script>location='index.php';</script>";
-				}else{
-					echo "<script>alert('Selamat datang')</script>";
-					echo "<script>location='index_p.php';</script>";
-				}
-			}
-			else
-			{
-				//gagal login
-				echo "<script>alert('Login failed! Please try again')</script>";
-				echo "<script>location='login.php';</script>";
-			}
-		}
-		?>
+    if($cek > 0){
+ 
+        $data = mysqli_fetch_assoc($result);
+     
+        // cek jika user login sebagai admin
+        if($data['level']=="admin"){
+     
+            // buat session login dan username
+            $_SESSION['username'] = $username;
+            $_SESSION['level'] = "admin";
+            // alihkan ke halaman dashboard admin
+            header("location:index.php");
+     
+        // cek jika user login sebagai pegawai
+        }else if($data['level']=="peminjam"){
+            // buat session login dan username
+            $_SESSION['username'] = $username;
+            $_SESSION['level'] = "peminjam";
+            // alihkan ke halaman dashboard pegawai
+            header("location:index_p.php");
+     
+        }
+    
+    }
+    else{
+        echo "<script>
+        alert('Maaf Anda Gagal Login')
+        </script>";
+    }	
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
