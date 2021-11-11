@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Nov 2021 pada 23.08
--- Versi server: 10.4.20-MariaDB
--- Versi PHP: 8.0.8
+-- Waktu pembuatan: 11 Nov 2021 pada 13.47
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `pinjamruang1`
 --
-CREATE DATABASE IF NOT EXISTS `pinjamruang1` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `pinjamruang1`;
 
 -- --------------------------------------------------------
 
@@ -66,7 +65,7 @@ CREATE TABLE `ruang` (
 --
 
 INSERT INTO `ruang` (`idruang`, `nama`, `kapasitas`, `status`, `gambar`, `jurusan`) VALUES
-(1, 'Ruang Teori 2', 0, 'tidak dipinjam', '6178cbd657180.jpg', 'Teknologi Informasi');
+(1, 'Ruang Teori 4', 4, 'dipinjam', '618a67f59ce4c.png', 'Teknologi Informasi');
 
 -- --------------------------------------------------------
 
@@ -76,16 +75,19 @@ INSERT INTO `ruang` (`idruang`, `nama`, `kapasitas`, `status`, `gambar`, `jurusa
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `level` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(2, 'admin', '21232f297a57a5a743894a0e4a801fc3');
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `level`) VALUES
+(4, 'peminjam', 'peminjam', '$2y$10$C96eLyRGKoI2yiO4//CLmOQmyHj6tnZ2oXgGgJADoponL.G4wFCO.', 'peminjam'),
+(5, 'admin', 'admin', '$2y$10$N9iDHJ8fIVl9V1WBxvwbxeTaXLA0/8xhDJ5ykzoaM3fCqL3Dyn0CW', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -124,13 +126,13 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT untuk tabel `ruang`
 --
 ALTER TABLE `ruang`
-  MODIFY `idruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
