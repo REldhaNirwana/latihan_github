@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 // Jika tidak bisa login maka balik ke login.php
 // jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
 // if (!isset($_SESSION['login'])) {
@@ -10,13 +10,13 @@ session_start();
 // Memanggil atau membutuhkan file function.php
 require 'function.php';
 
-// Mengambil data idruang
+// // Mengambil data idruang
 $idruang = $_GET['idruang'];
 
-// Mengambil data dari table
+// // Mengambil data dari table
 $ruang = query("SELECT * FROM ruang WHERE idruang = $idruang")[0];
 
-// Jika fungsi ubah lebih dari 0/data terubah, maka munculkan alert dibawah
+// // Jika fungsi ubah lebih dari 0/data terubah, maka munculkan alert dibawah
 if (isset($_POST['ubah'])) {
     if (ubah($_POST) > 0) {
         echo "<script>
@@ -96,15 +96,19 @@ if (isset($_POST['ubah'])) {
         </div>
         <div class="row my-2">
             <div class="col-md">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="peminjamanruangan/function.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="gambarLama" value="<?= $ruang['gambar']; ?>">
                     <div class="mb-3">
                         <label for="idruang" class="form-label">ID ruang</label>
-                        <input type="number" class="form-control w-50" id="idruang" value="<?= $ruang['idruang']; ?>" name="idruang" readonly>
+                        <input type="number" class="form-control w-50" id="idruang" value="<?= $ruang['idruang'][0]; ?>" name="idruang" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control w-50" id="nama" value="<?= $ruang['nama']; ?>" name="nama" autocomplete="off" required>
+                        <input type="text" class="form-control w-50" id="nama" value="<?php echo $ruang['nama'][0]; ?>" name="nama" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kapasitas" class="form-label">Kapasitas</label>
+                        <input type="number" class="form-control w-50" id="kapasitas" placeholder="Masukkan kapasitas" name="kapasitas" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
                         <label for="jurusan" class="form-label">Jurusan</label>
@@ -129,7 +133,6 @@ if (isset($_POST['ubah'])) {
                             <input class="form-check-input" type="radio" name="status" id="tidak dipinjam" value="tidak dipinjam" <?php if ($ruang['status'] == 'tidak dipinjam') { ?> checked='' <?php } ?>>
                             <label class="form-check-label" for="tidak dipinjam">tidak dipinjam</label>
                         </div>
-                    </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Gambar <i>(Saat ini)</i></label> <br>
                         <img src="img/<?= $ruang['gambar']; ?>" width="50%" style="margin-bottom: 10px;">
