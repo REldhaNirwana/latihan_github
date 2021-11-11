@@ -1,31 +1,12 @@
 <?php
-// Memanggil atau membutuhkan file function.php
 require 'function.php';
-
-		//jika daftar diklik
-	if(isset($_POST["daftar"]))
-	{
-		//mengambil inputan
-        $username = $_POST["username"];
-    	$password = $_POST["password"];
-	    $roles = "User";
-
-	    //validasi
-	$data = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$username' AND password='$password'");
-	$sama = mysqli_num_rows($data);
-	if($sama==1)
-	{
-		echo "<script>alert('Registrasi GAGAL. username sudah digunakan');</script>";
-		echo "<script>location='registrasi.php';</script>";
-	}
-	else
-	{
-		//insert ke tabel user
-	mysqli_query($koneksi,"INSERT INTO user(username, password, roles) VALUES ('$username', '$password','$roles')");
-	echo "<script>alert('Registrasi SUKSES. Silahkan login');</script>";
-	echo "<script>location='login.php';</script>";
-		}
-	}
+if(isset($_POST['signup']) ){
+  if(registrasiakun($_POST)> 0){
+    header("location: login.php");
+  }else{
+    echo mysqli_error($koneksi);
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -76,24 +57,37 @@ require 'function.php';
         </div>
     </nav>
     <!-- Close Navbar -->
+    
+    <body>
+    <form action=" " method="post">
+      <div class="container" >
+             <form class="form-signin"  style= "margin: 0 auto">
+                <h3 style=padding-top:50px;>Registrasi</h3>
+                
+                <input for = "name" type="text" id="name" name = "name" class="form-control" placeholder="Name" style="width: 370px" required autofocus>
+                <br>
+                
+                <input for = "username" type="text" id="username" name="username" class="form-control" placeholder="Username" style="width: 370px" required autofocus>
+                <br>
+                
+                <input for ="password" type="password" id="password" name="password" class="form-control" placeholder="Password" style="width: 370px" required>
+                <br>
 
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-md-6 text-center login">
-                <h4 class="fw-bold">Register</h4>
-                <form action="" method="post">
-                    <div class="form-group user">
-                        <input type="text" class="form-control w-50" placeholder="Masukkan Username" name="username" autocomplete="off" required>
-                    </div>
-                    <div class="form-group my-5">
-                        <input type="password" class="form-control w-50" placeholder="Masukkan Password" name="password" autocomplete="off" required>
-                    </div>
-                    <input type="submit" name="daftar" value="Daftar"><br>
-                    
-                </form>
-            </div>
-        </div>
+                <input for ="password2" type="password2" id="password2" name="password2" class="form-control" placeholder="Konfirmasi Password" style="width: 370px" required>
+                <br>
+
+                <div>
+                    <select class="form-select" name="level" id="level" for="level" style="width: 370px">
+                    <option selected>Level</option>
+                    <option value="admin">Admin</option>
+                    <option value="peminjam">Peminjam</option>
+                    </select>
+                </div><br>
+                <button class="btn btn-lg btn-primary btn-block" name="signup" type="submit">Sign Up</button>  
+              </form>    
+
     </div>
+</form>
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
