@@ -1,10 +1,10 @@
 <?php
 session_start();
 // Jika bisa login maka ke index.php
-if (isset($_SESSION['login'])) {
-    header('location:index.php');
-    exit;
-}
+// if (isset($_SESSION['login'])) {
+//     header('location:index.php');
+//     exit;
+// }
 
 // Memanggil atau membutuhkan file function.php
 require 'function.php';

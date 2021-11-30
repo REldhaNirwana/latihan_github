@@ -176,7 +176,7 @@ function tambah1($data)
     $nama_p = htmlspecialchars($data['nama_p']);
     $tgl_pinjam = Date('Y-m-d');
     $jam_awal = date('H:i:s');
-    $jam_akhir = '';
+    $jam_akhir = date('H:i:s');;
     $surat_p = upload1();
     $idruang = $data['idruang'];
 

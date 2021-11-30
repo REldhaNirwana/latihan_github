@@ -172,7 +172,7 @@ $peminjaman = query("SELECT * FROM peminjaman INNER JOIN ruang on(peminjaman.idr
             // Fungsi Table
 
             // Fungsi Detail
-            $('.detail').click(function() {
+            $('.detail_p').click(function() {
                 var dataPinjam = $(this).attr("data-ids");
                 $.ajax({
                     url: "detail_p.php",
