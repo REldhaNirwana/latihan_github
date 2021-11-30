@@ -57,7 +57,7 @@ $ruang = query("SELECT * FROM ruang ORDER BY idruang DESC");
                         <a class="nav-link" href="bantuan.php">Bantuan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="peminjaman_ps.php">Peminjaman</a>
+                        <a class="nav-link" href="peminjaman.php">Peminjaman</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
@@ -88,6 +88,7 @@ $ruang = query("SELECT * FROM ruang ORDER BY idruang DESC");
                             <th>Jurusan</th>
                             <th>Status</th>
                             <th>Aksi</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
