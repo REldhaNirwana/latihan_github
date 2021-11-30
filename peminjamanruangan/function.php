@@ -1,4 +1,5 @@
 <?php
+
 // Koneksi Database
 $koneksi = mysqli_connect("localhost", "root", "", "pinjamruang1");
 
@@ -21,6 +22,43 @@ function query($query)
     return $rows;
 }
 
+
+//Membuat fungsi registrasi
+function registrasiakun($data){
+    global $koneksi;
+    $name = strtolower(stripslashes($data["name"]));
+    $username = strtolower(stripslashes($data["username"]));
+    $password =  mysqli_real_escape_string($koneksi, $data["password"]);
+    $password2 =  mysqli_real_escape_string($koneksi, $data["password2"]);
+    //$level = strtolower(stripslashes($data["level"]));
+    $level =  mysqli_real_escape_string($koneksi, $data["level"]);
+
+    //cek pengguna sudah ada atau belum
+    $result = mysqli_query($koneksi, "SELECT username FROM user WHERE username = '$username'");
+    if(mysqli_fetch_assoc($result)){
+        echo "<script> alert('Maaf Username sudah terdaftar');</script>";
+        return false; 
+    }
+
+    //cek konfirmasi password
+    if($password !== $password2){
+        echo "<script>
+        alert('Konfirmasi password tidak sesuai'); 
+        </script>";
+    
+    return false;
+    }
+
+    //eksripsi password
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    //menambahkan pengguna baru ke database
+    mysqli_query($koneksi,"INSERT INTO user VALUES('','$name','$username','$password','$level')");
+    return mysqli_affected_rows($koneksi);
+
+    
+}
+
 // Membuat fungsi tambah
 function tambah($data)
 {
@@ -41,7 +79,9 @@ function tambah($data)
 
     mysqli_query($koneksi, $sql);
 
-    return mysqli_affected_rows($koneksi);
+ 
+   return mysqli_affected_rows($koneksi);
+
 }
 
 // Membuat fungsi hapus
@@ -49,7 +89,7 @@ function hapus($idruang)
 {
     global $koneksi;
 
-    mysqli_query($koneksi, "DELETE FROM ruang WHERE idruang = $idruang");
+    mysqli_query($koneksi, "DELETE FROM ruang WHERE idruang = '$idruang'");
     return mysqli_affected_rows($koneksi);
 }
 
@@ -63,7 +103,7 @@ function ubah($data)
     $kapasitas = htmlspecialchars($data['kapasitas']);
     $jurusan = $data['jurusan'];
     $status = $data['status'];
-    $gambar = upload();
+    //$gambar = upload();
 
     $gambarLama = $data['gambarLama'];
 
@@ -73,12 +113,13 @@ function ubah($data)
         $gambar = upload();
     }
 
-    $sql = "UPDATE ruang SET nama = '$nama', kapasitas = '$kapasitas', jurusan = '$jurusan', status = '$status', gambar = '$gambar' WHERE idruang = $idruang";
+    $sql = "UPDATE ruang SET nama = '$nama', kapasitas = '$kapasitas', jurusan = '$jurusan', status = '$status', gambar = '$gambar' WHERE idruang = '$idruang'";
 
     mysqli_query($koneksi, $sql);
 
     return mysqli_affected_rows($koneksi);
 }
+
 
 // Membuat fungsi upload gambar
 function upload()
