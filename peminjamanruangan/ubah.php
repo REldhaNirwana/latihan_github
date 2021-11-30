@@ -96,7 +96,7 @@ if (isset($_POST['ubah'])) {
         </div>
         <div class="row my-2">
             <div class="col-md">
-                <form action="peminjamanruangan/function.php" method="post" enctype="multipart/form-data">
+                <form action=" " method="post" enctype="multipart/form-data">
                     <input type="hidden" name="gambarLama" value="<?= $ruang['gambar']; ?>">
                     <div class="mb-3">
                         <label for="idruang" class="form-label">ID ruang</label>
