@@ -2,10 +2,10 @@
 session_start();
 // Jika tidak bisa login maka balik ke login.php
 // jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
-// if (!isset($_SESSION['login'])) {
-//     header('location:login.php');
-//     exit;
-// }
+if (!isset($_SESSION['login'])) {
+    header('location:login.php');
+    exit;
+}
 
 // Memanggil atau membutuhkan file function.php
 require 'function.php';
@@ -104,7 +104,7 @@ if (isset($_POST['ubah1'])) {
                     </div>
                     <div class="mb-3">
                         <label for="nama_p" class="form-label">Nama</label>
-                        <input type="text" class="form-control w-50" id="nama_p" value="<?= $peminjaman['nama_p']; ?>" name="nama_p" autocomplete="off" required>
+                        <input type="text" class="form-control w-50" id="nama_p" value="<?php echo $peminjaman['nama_p']; ?>" name="nama_p" required>
                     </div>
                     <div class="mb-3">
                         <label for="tgl_pinjam" class="form-label">Tanggal Pinjam</label>

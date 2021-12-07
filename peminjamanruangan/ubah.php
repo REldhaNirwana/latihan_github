@@ -1,11 +1,12 @@
 <?php
 
+session_start();
 // Jika tidak bisa login maka balik ke login.php
 // jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
-// if (!isset($_SESSION['login'])) {
-//     header('location:login.php');
-//     exit;
-// }
+if (!isset($_SESSION['login'])) {
+    header('location:login.php');
+    exit;
+}
 
 // Memanggil atau membutuhkan file function.php
 require 'function.php';
@@ -100,11 +101,11 @@ if (isset($_POST['ubah'])) {
                     <input type="hidden" name="gambarLama" value="<?= $ruang['gambar']; ?>">
                     <div class="mb-3">
                         <label for="idruang" class="form-label">ID ruang</label>
-                        <input type="number" class="form-control w-50" id="idruang" value="<?= $ruang['idruang'][0]; ?>" name="idruang" readonly>
+                        <input type="number" class="form-control w-50" id="idruang" value="<?= $ruang['idruang']; ?>" name="idruang" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control w-50" id="nama" value="<?php echo $ruang['nama'][0]; ?>" name="nama" required>
+                        <input type="text" class="form-control w-50" id="nama" value="<?php echo $ruang['nama']; ?>" name="nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="kapasitas" class="form-label">Kapasitas</label>

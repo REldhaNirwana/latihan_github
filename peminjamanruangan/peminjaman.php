@@ -3,10 +3,10 @@
 session_start();
 // Jika tidak bisa login maka balik ke login.php
 // jika masuk ke halaman ini melalui url, maka langsung menuju halaman login
-// if (!isset($_SESSION['login'])) {
-//     header('location:login.php');
-//     exit;
-// }
+if (!isset($_SESSION['login'])) {
+    header('location:login.php');
+    exit;
+}
 
 // Memanggil atau membutuhkan file function.php
 require 'function.php';
@@ -81,6 +81,7 @@ $peminjaman = query("SELECT * FROM peminjaman INNER JOIN ruang on(peminjaman.idr
         <div class="row my-2">
             <div class="col-md">
                 <a href="add_p.php" class="btn btn-primary"><i class="bi bi-person-plus-fill"></i>&nbsp;Tambah Data</a>
+                <a href="export_p.php" target="_blank" class="btn btn-success ms-1"><i class="bi bi-file-earmark-spreadsheet-fill"></i>&nbsp;Ekspor ke Excel</a>
             </div>
         </div>
         <div class="row my-3">
@@ -105,7 +106,6 @@ $peminjaman = query("SELECT * FROM peminjaman INNER JOIN ruang on(peminjaman.idr
                                 <td><?= $row['tgl_pinjam']; ?></td>
                                 <td>
                                     <button class="btn btn-success btn-sm text-white detail" data-id="<?= $row['idpinjam']; ?>" style="font-weight: 600;"><i class="bi bi-info-circle-fill"></i>&nbsp;Detail</button> |
-
                                     <a href="ubah_p.php?idpinjam=<?= $row['idpinjam']; ?>" class="btn btn-warning btn-sm" style="font-weight: 600;"><i class="bi bi-pencil-square"></i>&nbsp;Ubah</a> |
 
                                     <a href="hapus_p.php?idpinjam=<?= $row['idpinjam']; ?>" class="btn btn-danger btn-sm" style="font-weight: 600;" onclick="return confirm('Apakah anda yakin ingin menghapus data <?= $row['nama_p']; ?> ?');"><i class="bi bi-trash-fill"></i>&nbsp;Hapus</a>

@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
     $password = ($_POST['password']);
 
     // mengambil data dari user dimana username yg diambil
-    $result = mysqli_query($koneksi,"select * from user where username='$username'");
+    $result = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$username'");
 
     $cek = mysqli_num_rows($result);
 
@@ -116,7 +116,8 @@ if (isset($_POST['login'])) {
                     <div class="form-group my-5">
                         <input type="password" class="form-control w-50" placeholder="Masukkan Password" name="password" autocomplete="off" required>
                     </div>
-                    <input type="submit" name="login" value="Login"><br>
+                    <!-- <input type="submit" name="login" value="Login"><br> -->
+                    <button class="btn btn-primary text-uppercase" type="submit" name="login">Login</button>
                     <p>Belum punya akun? <a href="registrasi.php" class="daftar">Daftar</a></p>
                 </form>
             </div>
